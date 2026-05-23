@@ -1,0 +1,176 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  13
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      binary;
+    class       dictionary;
+    object      snappyHexMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+castellatedMesh on;
+snap            on;
+addLayers       off;
+
+meshQualityControls
+{
+    maxNonOrtho 60;
+    maxBoundarySkewness 20;
+    maxInternalSkewness 4;
+    maxConcave 70;
+    minVol 1e-10;
+    minTetQuality 1e-2;
+    minArea 1e-10;
+    minTwist 0.05;
+    minDeterminant 0.01;
+    minFaceWeight 0.05;
+    minVolRatio 0.01;
+    minTriangleTwist -1;
+    nSmoothScale 4;
+    errorReduction 0.75;
+}
+
+geometry
+{
+    dumbell
+    {
+        type triSurfaceMesh;
+        file "dumbell_mesh.stl";
+    }
+
+    inlet
+    {
+        type triSurfaceMesh;
+        file "dumbell_inlet.stl";
+    }
+
+    outlet
+    {
+        type triSurfaceMesh;
+        file "dumbell_outlet.stl";
+    }
+
+    walls
+    {
+        type triSurfaceMesh;
+        file "dumbell_walls.stl";
+    }
+
+    interior_long
+    {
+        type triSurfaceMesh;
+        file "dumbell_long_interior.stl";
+    }
+    
+    interior_short
+    {
+	type triSurfaceMesh;
+	file "dumbell_short_interior.stl";
+    } 
+    
+};
+
+castellatedMeshControls
+{
+    maxLocalCells 2000000;
+    maxGlobalCells 50000000;  
+    minRefinementCells 10; 
+    nCellsBetweenLevels 3;  
+    resolveFeatureAngle 5;
+    allowFreeStandingZoneFaces false;
+
+   features
+   (
+       {
+           file "dumbell_mesh.eMesh";
+           level 1;
+       }
+   );
+
+    refinementSurfaces
+    {
+        walls
+	{
+	    level (1 2);
+            patchInfo { type wall; }
+	}
+
+        inlet
+        {
+            level (0 0);
+            patchInfo { type patch; }
+        }
+
+        outlet
+        {
+            level (0 0);
+            patchInfo { type patch; }
+
+        }
+
+        interior_long
+        {
+            level (0 0);
+            patchInfo { type patch; }
+        }
+        
+        interior_short
+        {
+            level (0 0);
+            patchInfo { type patch; }
+        }
+    }
+
+    insidePoint (10 0 0);
+
+}
+
+snapControls
+{
+    nSmoothPatch 3;
+    tolerance 2.0;
+    nSolveIter 50;
+    nRelaxIter 20;
+    nFeatureSnapIter 20;
+    implicitFeatureSnap false;
+    explicitFeatureSnap true;
+    multiRegionFeatureSnap false;
+}
+
+// addLayersControls
+// {
+//     relativeSizes       true;
+//     layers
+//     {
+//         walls
+//         {
+//             nSurfaceLayers 3;           
+//         }
+//     }
+//
+//     expansionRatio 1.1;
+//     finalLayerThickness 0.2;
+//     minThickness 0.001;
+//     nGrow 0;
+//     featureAngle 60;
+//     slipFeatureAngle 30;
+//     nRelaxIter 3;
+//     nSmoothSurfaceNormals 1;
+//     nSmoothNormals 3;
+//     nSmoothThickness 10;
+//     maxFaceThicknessRatio 0.5;          
+//     maxThicknessToMedialRatio 0.3;
+//     minMedianAxisAngle 90;
+//     nBufferCellsNoExtrude 0;
+//     nLayerIter 50;
+// }
+
+mergeTolerance 1e-3;
+
+// ************************************************************************* //
+

@@ -1,0 +1,27 @@
+[project]
+name = "taylor-dispersion-arbitrary-changing-shapes"
+version = "0.1.0"
+description = "Taylor dispersion in long straight channels of arbitrary and gradually changing shapes"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy",
+    "scipy",
+    "numdifftools",
+    "matplotlib",
+    "seaborn",
+    "ipynb>=0.5.1",
+    "fluidfoam",
+    "jupyter",
+    "ipykernel",
+    "pathlib>=1.0.1",
+    "numba>=0.65.1",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+
+[dependency-groups]
+dev = [
+    "jupyterlab>=4.5.6",
+]

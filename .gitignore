@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS / junk files
+.DS_Store
+*Zone.Identifier
+* - Copy
+* - Copy.*
+
+# Output data
+data_output/
+
+# Cached OpenFOAM interpolation data
+foam_data_cache.npz
+
+# --- OpenFOAM ---
+# Generated mesh (regenerate with surfaceFeatures / blockMesh / snappyHexMesh).
+# The input geometry in constant/triSurface/*.stl is kept under version control.
+polyMesh/
+extendedFeatureEdgeMesh/
+*.eMesh
+
+# Domain decomposition / parallel-run artifacts
+processor*/
+cellProc
+
+# VTK export
+VTK/
+
+# Solution timestep directories (keep the 0/ initial-condition directory)
+dumbell_geo_short_quarter_re0.1/[1-9]*/
+dumbell_geo_short_quarter_re1/[1-9]*/
+
+# OpenFOAM logs
+log.*
