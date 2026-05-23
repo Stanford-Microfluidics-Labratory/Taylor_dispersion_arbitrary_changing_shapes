@@ -1,6 +1,6 @@
-# Taylor Dispersion in Channels with Arbitrary Cross-Sectional Shapes
+# Taylor dispersion in long straight channels of arbitrary and gradually changing size and shape
 
-Code accompanying the paper "Taylor dispersion in long straight channels of arbitrary and gradually changing shapes".
+Code accompanying the paper "Taylor dispersion in long straight channels of arbitrary and gradually changing size and shape".
 
 ## Installation
 
